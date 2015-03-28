@@ -1,6 +1,9 @@
 package opdracht1;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -10,7 +13,7 @@ public class Driver {
 
     private Telefoonboek telefoonboek;
     private Scanner scanner;
-	private String csvPath = "data/telefoonboek.csv"
+	private String csvPath = "data/telefoonboek.csv";
 
     public static void main(String[] args) {
         new Driver();
