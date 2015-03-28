@@ -10,6 +10,7 @@ public class Driver {
 
     private Telefoonboek telefoonboek;
     private Scanner scanner;
+	private String csvPath = "data/telefoonboek.csv"
 
     public static void main(String[] args) {
         new Driver();
@@ -61,7 +62,7 @@ public class Driver {
     }
     public void fillTelefoonboek() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("data"));
+            BufferedReader reader = new BufferedReader(new FileReader(csvPath));
             String persoon = reader.readLine();
             while(persoon != null){
                 String[] attributen = persoon.split(",");
