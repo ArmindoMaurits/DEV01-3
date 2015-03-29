@@ -24,7 +24,7 @@ public class PersoonLader {
             while ((line = fileReader.readLine()) != null)
             {
                 String[] tokens = line.split(DELIMITER);
-                personen.add(new Persoon(tokens[0],tokens[1],tokens[2],"hoi"));
+                personen.add(new Persoon(tokens[0],tokens[1],tokens[2],tokens[0] + ".png"));
             }
         }
         catch (Exception e) {
