@@ -39,7 +39,7 @@ public class PersoonLader {
     }
     public static void main(String[] args) {
         new PersoonLader();
-        System.out.println(PersoonLader.personen.toString());
+        System.out.println(personen.get(0));
     }
 
 }
