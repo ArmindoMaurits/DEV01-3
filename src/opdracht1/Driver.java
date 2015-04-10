@@ -49,8 +49,8 @@ public class Driver {
                 break;
             }
         }
-
     }
+
     public void findPersoon(String key){
         System.out.println("Wie wil je vinden?");
         String value = scanner.next();
@@ -59,10 +59,11 @@ public class Driver {
 
     public int askQuestion(){
         System.out.println("Waarop wil je iemand zoeken?");
-        System.out.println("1 voor voornaam - 2 voor achternaam - 3 voor telefoonnummer - 4 om iedereen te zien4");
+        System.out.println("1 voor voornaam - 2 voor achternaam - 3 voor telefoonnummer - 4 om iedereen te zien");
         int selectie = scanner.nextInt();
         return selectie;
     }
+
     public void fillTelefoonboek() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(csvPath));
@@ -77,7 +78,6 @@ public class Driver {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 }
