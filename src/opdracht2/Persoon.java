@@ -1,13 +1,13 @@
-package opdracht2.personen;
+package opdracht2;
 
 /**
  * Created by Wouter on 3/28/2015.
  */
 public class Persoon {
-    String naam;
-    String knownFor;
-    String imgPath;
-    String birthrange;
+    private String naam;
+    private String knownFor;
+    private String imgPath;
+    private String birthrange;
 
     public Persoon(String naam, String birthrange, String knownFor, String imgPath) {
         this.naam = naam;
@@ -34,11 +34,6 @@ public class Persoon {
 
     @Override
     public String toString() {
-        return "Persoon{" +
-                "naam='" + naam + '\'' +
-                ", birthrange='" + birthrange + '\'' +
-                ", knownFor='" + knownFor + '\'' +
-                ", imgPath='" + imgPath + '\'' +
-                '}';
+        return naam;
     }
 }
