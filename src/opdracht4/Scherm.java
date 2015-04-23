@@ -34,38 +34,7 @@ public class Scherm extends JFrame{
             denumerator1.setText("INPUT");
 
             selectie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "+", "-", "*", "/" }));
-            equalsbutton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String currselectie = (String)selectie.getSelectedItem();
-                    int[] returnvalues = new int[3];
 
-                    if(currselectie == "+"){
-                        try {
-                            returnvalues = Operator.add(Integer.parseInt(numerator1.getText()), Integer.parseInt(denumerator1.getText()), Integer.parseInt(numerator2.getText()), Integer.parseInt(denumerator2.getText()));
-                        }catch (ArithmeticException ex){
-                            JDialog dialog = new JDialog();
-                            dialog.add(new JLabel("Cannot devide by zero"));
-                        }
-                    }else if(currselectie == "-"){
-                        returnvalues =Operator.extract(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
-                    }else if(currselectie == "*"){
-                        returnvalues =Operator.mutiply(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
-                    }else if(currselectie == "/"){
-                        returnvalues =Operator.divide(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
-                    }
-                    numerator3.setText(returnvalues[0]+"");
-                    denumerator3.setText(returnvalues[1]+ "");
-                    helen.setText(returnvalues[2]+"");
-                    if(returnvalues[0] == 0 ){
-                        //numerator3.setVisible(false);
-                        denumerator3.setVisible(false);
-                    }else{
-                        numerator3.setVisible(true);
-                        denumerator3.setVisible(true);
-                    }
-                }
-            });
 
             numerator2.setText("INPUT");
 
@@ -74,10 +43,57 @@ public class Scherm extends JFrame{
             helen.setText("");
 
             numerator3.setText("");
+            numerator3.setVisible(false);
 
             denumerator3.setText("");
+            denumerator3.setVisible(false);
+
+            jSeparator3.setVisible(false);
 
             equalsbutton.setText("=");
+            equalsbutton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String currselectie = (String)selectie.getSelectedItem();
+                    int[] returnvalues = new int[3];
+                    try {
+                        if(currselectie == "+"){
+                            returnvalues = Operator.add(Integer.parseInt(numerator1.getText()), Integer.parseInt(denumerator1.getText()), Integer.parseInt(numerator2.getText()), Integer.parseInt(denumerator2.getText()));
+                        }else if(currselectie == "-"){
+                            returnvalues =Operator.extract(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
+                        }else if(currselectie == "*"){
+                            returnvalues =Operator.mutiply(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
+                        }else if(currselectie == "/"){
+                            returnvalues =Operator.divide(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
+                        }
+                    }catch (ArithmeticException ex){
+                        JDialog dialog = new JDialog();
+                        dialog.add(new JLabel("Cannot devide by zero"));
+                        dialog.setSize(200, 100);
+                        dialog.setVisible(true);
+                        dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    }
+                    helen.setVisible(true);
+                    numerator3.setVisible(true);
+                    denumerator3.setVisible(true);
+                    jSeparator3.setVisible(true);
+                    if(returnvalues[0] < 0){
+                        if(returnvalues[2] != 0){
+                            returnvalues[0] = returnvalues[0]*-1;
+                        }else{
+                            helen.setVisible(false);
+                        }
+                    }
+                    numerator3.setText(returnvalues[0]+"");
+                    denumerator3.setText(returnvalues[1]+ "");
+                    helen.setText(returnvalues[2]+"");
+                    if(returnvalues[0] == 0 ){
+                        numerator3.setVisible(false);
+                        denumerator3.setVisible(false);
+                        jSeparator3.setVisible(false);
+                    }
+                }
+            });
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
             getContentPane().setLayout(layout);
@@ -172,102 +188,6 @@ public class Scherm extends JFrame{
                 }
             });
         }
-
-    public JTextField getDenumerator1() {
-        return denumerator1;
-    }
-
-    public void setDenumerator1(JTextField denumerator1) {
-        this.denumerator1 = denumerator1;
-    }
-
-    public JTextField getDenumerator2() {
-        return denumerator2;
-    }
-
-    public void setDenumerator2(JTextField denumerator2) {
-        this.denumerator2 = denumerator2;
-    }
-
-    public JLabel getDenumerator3() {
-        return denumerator3;
-    }
-
-    public void setDenumerator3(JLabel denumerator3) {
-        this.denumerator3 = denumerator3;
-    }
-
-    public JToggleButton getEqualsbutton() {
-        return equalsbutton;
-    }
-
-    public void setEqualsbutton(JToggleButton equalsbutton) {
-        this.equalsbutton = equalsbutton;
-    }
-
-    public JLabel getHelen() {
-        return helen;
-    }
-
-    public void setHelen(JLabel helen) {
-        this.helen = helen;
-    }
-
-    public JSeparator getjSeparator1() {
-        return jSeparator1;
-    }
-
-    public void setjSeparator1(JSeparator jSeparator1) {
-        this.jSeparator1 = jSeparator1;
-    }
-
-    public JSeparator getjSeparator2() {
-        return jSeparator2;
-    }
-
-    public void setjSeparator2(JSeparator jSeparator2) {
-        this.jSeparator2 = jSeparator2;
-    }
-
-    public JSeparator getjSeparator3() {
-        return jSeparator3;
-    }
-
-    public void setjSeparator3(JSeparator jSeparator3) {
-        this.jSeparator3 = jSeparator3;
-    }
-
-    public JTextField getNumerator1() {
-        return numerator1;
-    }
-
-    public void setNumerator1(JTextField numerator1) {
-        this.numerator1 = numerator1;
-    }
-
-    public JTextField getNumerator2() {
-        return numerator2;
-    }
-
-    public void setNumerator2(JTextField numerator2) {
-        this.numerator2 = numerator2;
-    }
-
-    public JLabel getNumerator3() {
-        return numerator3;
-    }
-
-    public void setNumerator3(JLabel numerator3) {
-        this.numerator3 = numerator3;
-    }
-
-    public JComboBox getSelectie() {
-        return selectie;
-    }
-
-    public void setSelectie(JComboBox selectie) {
-        this.selectie = selectie;
-    }
 
     private javax.swing.JTextField denumerator1;
         private javax.swing.JTextField denumerator2;
