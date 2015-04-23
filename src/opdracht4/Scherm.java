@@ -84,6 +84,9 @@ public class Scherm extends JFrame{
                             helen.setVisible(false);
                         }
                     }
+                    if(returnvalues[2] == 0){
+                        helen.setVisible(false);
+                    }
                     numerator3.setText(returnvalues[0]+"");
                     denumerator3.setText(returnvalues[1]+ "");
                     helen.setText(returnvalues[2]+"");
