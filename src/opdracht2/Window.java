@@ -78,7 +78,6 @@ public class Window{
         try {
             knownForLabel.setText(persoon.getKnownFor());
             knownForLabel.updateUI();
-            System.out.println(persoon.getKnownFor());
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -88,7 +87,6 @@ public class Window{
         try {
             birthRangeLabel.setText(persoon.getBirthrange());
             birthRangeLabel.updateUI();
-            System.out.println(persoon.getKnownFor());
         } catch (Exception e){
             e.printStackTrace();
         }
