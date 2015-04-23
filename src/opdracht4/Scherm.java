@@ -31,18 +31,22 @@ public class Scherm extends JFrame{
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
             numerator1.setText("INPUT");
-
             denumerator1.setText("INPUT");
 
             selectie.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "+", "-", "*", "/" }));
-            selectie.addActionListener(new ActionListener() {
+            equalsbutton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String currselectie = (String)selectie.getSelectedItem();
                     int[] returnvalues = new int[3];
 
                     if(currselectie == "+"){
-                        returnvalues = Operator.add(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
+                        try {
+                            returnvalues = Operator.add(Integer.parseInt(numerator1.getText()), Integer.parseInt(denumerator1.getText()), Integer.parseInt(numerator2.getText()), Integer.parseInt(denumerator2.getText()));
+                        }catch (ArithmeticException ex){
+                            JDialog dialog = new JDialog();
+                            dialog.add(new JLabel("Cannot devide by zero"));
+                        }
                     }else if(currselectie == "-"){
                         returnvalues =Operator.extract(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
                     }else if(currselectie == "*"){
@@ -54,7 +58,7 @@ public class Scherm extends JFrame{
                     denumerator3.setText(returnvalues[1]+ "");
                     helen.setText(returnvalues[2]+"");
                     if(returnvalues[0] == 0 ){
-                        numerator3.setVisible(false);
+                        //numerator3.setVisible(false);
                         denumerator3.setVisible(false);
                     }else{
                         numerator3.setVisible(true);

@@ -5,35 +5,54 @@ package opdracht4;
  */
 public class Operator {
     public static int[] mutiply(int num1,int denum1,int num2,int denum2){
-        int[] ints = new int[3];
-        return ints;
+        double tempnum1 = num1;
+        double tempdenum1 = denum1;
+        double tempnum2 = num2;
+        double tempdenum2 = denum2;
+        double tempnum = tempnum2/tempdenum1*tempnum1;
+        return simplify((int)(tempnum*100),(int)(tempdenum2*100));
     }
     public static int[] divide(int num1,int denum1,int num2,int denum2){
-        int[] ints = new int[3];
-
-        return ints;
+        double tempnum1 = num1;
+        double tempdenum1 = denum1;
+        double tempnum2 = num2;
+        double tempdenum2 = denum2;
+        double tempnum = tempdenum2/tempdenum1*tempnum1;
+        return simplify((int)(tempnum*100),(int)(tempnum2*100));
     }
     public static int[] extract(int num1,int denum1,int num2,int denum2){
-        int[] ints = new int[3];
         int tempnum1 = num1*denum2;
         int tempnum2 = num2*denum1;
         int tempdenum = denum1*denum2;
-        int shared = tempdenum/((tempnum1-tempnum2)%tempdenum);
-        int tempnum = ((tempnum1-tempnum2)%tempdenum)/shared;
-        ints[0] = tempnum<0 ? -tempnum :tempnum;
-        ints[1] = tempdenum/shared < 0 ? -tempdenum/shared : tempdenum/shared;
-        ints[2] = (tempnum1-tempnum2)/tempdenum;
-        return ints;
+        int tempnum3 = tempnum1-tempnum2;
+        return simplify(tempnum3,tempdenum);
     }
     public static int[] add(int num1,int denum1,int num2,int denum2){
-        int[] ints = new int[3];
         int tempnum1 = num1*denum2;
         int tempnum2 = num2*denum1;
         int tempdenum = denum1*denum2;
-        int shared = tempdenum/((tempnum1+tempnum2)%tempdenum);
-        ints[0] = ((tempnum1+tempnum2)%tempdenum)/shared;
-        ints[1] = tempdenum/shared;
-        ints[2] = (tempnum1+tempnum2)/tempdenum;
+
+        //int shared = tempdenum/((tempnum1+tempnum2)%tempdenum);
+        int tempnum3 = tempnum1+tempnum2;
+        return simplify(tempnum3,tempdenum);
+    }
+    private static int[] simplify(int num, int denum){
+        int[] ints = new int[3];
+        int tempnum = num % denum;
+        int heel = num/denum;
+        ints[0] = tempnum;
+        ints[1] = denum;
+        ints[2] = heel;
+        for(int i = denum;i > 1; i--){
+            if(tempnum%i == 0 && denum%i == 0 ){
+                ints[0] = tempnum/i;
+                ints[1] = denum/i;
+                break;
+            }
+        }
+        if(ints[0] != tempnum || ints[1] != denum){
+            simplify(ints[0]*heel,ints[1]);
+        }
         return ints;
     }
 
