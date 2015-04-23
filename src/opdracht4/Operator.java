@@ -5,20 +5,12 @@ package opdracht4;
  */
 public class Operator {
     public static int[] mutiply(int num1,int denum1,int num2,int denum2){
-        double tempnum1 = num1;
-        double tempdenum1 = denum1;
-        double tempnum2 = num2;
-        double tempdenum2 = denum2;
-        double tempnum = tempnum2/tempdenum1*tempnum1;
-        return simplify((int)(tempnum*100),(int)(tempdenum2*100));
+        double tempnum = (double)num2/(double)denum1*(double)num1;
+        return simplify((int)(tempnum*100),(denum2*100));
     }
     public static int[] divide(int num1,int denum1,int num2,int denum2){
-        double tempnum1 = num1;
-        double tempdenum1 = denum1;
-        double tempnum2 = num2;
-        double tempdenum2 = denum2;
-        double tempnum = tempdenum2/tempdenum1*tempnum1;
-        return simplify((int)(tempnum*100),(int)(tempnum2*100));
+        double tempnum = (double)denum2/(double)denum1*(double)num1;
+        return simplify((int)(tempnum*100),(num2*100));
     }
     public static int[] extract(int num1,int denum1,int num2,int denum2){
         int tempnum1 = num1*denum2;
