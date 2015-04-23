@@ -11,24 +11,22 @@ import java.io.File;
 import java.io.IOException;
 
 public class Scherm {
-    private JFrame frame;
-    private JPanel panelTop;
-    private JPanel panelBottom;
-    private JLabel imageLabel;
     public JButton nextButton;
     public JButton prevButton;
     private Image img;
+    private JLabel imageLabel;
+    private int counter = 1;
 
     public static void main(String[] args) {
         new Scherm().start();
     }
 
     public void start() {
-        frame = new JFrame("Kleurenblindheidstest");
+        JFrame frame = new JFrame("Kleurenblindheidstest");
         frame.getContentPane().setLayout(new BorderLayout());
         frame.setSize(700, 500);
 
-        panelTop = new JPanel();
+        JPanel panelTop = new JPanel();
         panelTop.setBackground(Color.DARK_GRAY);
         panelTop.setPreferredSize(new Dimension(680,380));
 
@@ -36,7 +34,7 @@ public class Scherm {
         imageLabel.setSize(680, 380);
 
         try {
-            Image img = ImageIO.read(new File("./data/kleurenblindheidstest/3.jpg"));
+            img = ImageIO.read(new File("./data/kleurenblindheidstest/"+ counter + ".jpg"));
             imageLabel.setIcon(new ImageIcon(img.getScaledInstance(680, 315, 0)));
         }catch (IOException e) {
             e.printStackTrace();
@@ -44,7 +42,7 @@ public class Scherm {
 
         panelTop.add(imageLabel);
 
-        panelBottom = new JPanel();
+        JPanel panelBottom = new JPanel();
         panelBottom.setBackground(Color.DARK_GRAY);
 
         prevButton = new JButton("Vorige");
@@ -53,7 +51,13 @@ public class Scherm {
         imageLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("geklikt");
+                try {
+                    img = ImageIO.read(new File("./data/kleurenblindheidstest/"+ counter + "_oplossing.jpg"));
+                    imageLabel.setIcon(new ImageIcon(img.getScaledInstance(680, 315, 0)));
+                    imageLabel.updateUI();
+                }catch (IOException f) {
+                    f.printStackTrace();
+                }
             }
 
             @Override
@@ -80,16 +84,36 @@ public class Scherm {
         prevButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    counter--;
+                    System.out.println(counter);
+                    img = ImageIO.read(new File("./data/kleurenblindheidstest/"+ counter + ".jpg"));
+                    imageLabel.setIcon(new ImageIcon(img.getScaledInstance(680, 315, 0)));
+                    imageLabel.updateUI();
+                    enableButtons();
+                }catch (IOException f) {
+                    f.printStackTrace();
+                }
             }
         });
 
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    counter++;
+                    System.out.println(counter);
+                    img = ImageIO.read(new File("./data/kleurenblindheidstest/"+ counter + ".jpg"));
+                    imageLabel.setIcon(new ImageIcon(img.getScaledInstance(680, 315, 0)));
+                    imageLabel.updateUI();
+                    enableButtons();
+                }catch (IOException f) {
+                    f.printStackTrace();
+                }
             }
         });
+
+        enableButtons();
 
         panelBottom.add(prevButton, BorderLayout.WEST);
         panelBottom.add(nextButton, BorderLayout.EAST);
@@ -102,4 +126,17 @@ public class Scherm {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+
+    private void enableButtons(){
+        if(counter == 1) {
+            prevButton.setEnabled(false);
+            nextButton.setEnabled(true);
+        }else if(counter == 11) {
+            nextButton.setEnabled(false);
+            prevButton.setEnabled(true);
+        } else {
+            prevButton.setEnabled(true);
+            nextButton.setEnabled(true);
+        }
+    }
 }
