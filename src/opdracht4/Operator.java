@@ -31,8 +31,6 @@ public class Operator {
         int tempnum1 = num1*denum2;
         int tempnum2 = num2*denum1;
         int tempdenum = denum1*denum2;
-
-        //int shared = tempdenum/((tempnum1+tempnum2)%tempdenum);
         int tempnum3 = tempnum1+tempnum2;
         return simplify(tempnum3,tempdenum);
     }
