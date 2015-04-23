@@ -12,7 +12,7 @@ public class Persoon {
     HashMap<String,String> attributen;
 
     public Persoon(String voornaam, String achternaam, String telefoonnummer) {
-        attributen = new HashMap<String, String>();
+        attributen = new HashMap();
         attributen.put(VOORNAAM, voornaam);
         attributen.put(ACHTERNAAM, achternaam);
         attributen.put(TELEFOONNUMMER, telefoonnummer);

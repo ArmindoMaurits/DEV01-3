@@ -38,7 +38,7 @@ public class Telefoonboek {
     public List<Persoon> findPeople(String key, String value){
         List<Persoon> tempPersonen = new ArrayList();
         for(Persoon persoon : personen){
-            if(persoon.getAttribuut(key).toUpperCase().equals(value.toUpperCase())){
+            if(persoon.getAttribuut(key).toUpperCase().contains(value.toUpperCase())){
                 tempPersonen.add(persoon);
             }
         }
