@@ -56,20 +56,22 @@ public class Scherm extends JFrame{
                 public void actionPerformed(ActionEvent e) {
                     String currselectie = (String)selectie.getSelectedItem();
                     int[] returnvalues = new int[3];
+
                     try {
                         if(currselectie == "+"){
-                            returnvalues = Operator.add(Integer.parseInt(numerator1.getText()), Integer.parseInt(denumerator1.getText()), Integer.parseInt(numerator2.getText()), Integer.parseInt(denumerator2.getText()));
+                            returnvalues = Breuk.add(Integer.parseInt(numerator1.getText()), Integer.parseInt(denumerator1.getText()), Integer.parseInt(numerator2.getText()), Integer.parseInt(denumerator2.getText()));
                         }else if(currselectie == "-"){
-                            returnvalues =Operator.extract(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
+                            returnvalues = Breuk.extract(Integer.parseInt(numerator1.getText()), Integer.parseInt(denumerator1.getText()), Integer.parseInt(numerator2.getText()), Integer.parseInt(denumerator2.getText()));
                         }else if(currselectie == "*"){
-                            returnvalues =Operator.mutiply(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
+                            returnvalues = Breuk.mutiply(Integer.parseInt(numerator1.getText()), Integer.parseInt(denumerator1.getText()), Integer.parseInt(numerator2.getText()), Integer.parseInt(denumerator2.getText()));
                         }else if(currselectie == "/"){
-                            returnvalues =Operator.divide(Integer.parseInt(numerator1.getText()),Integer.parseInt(denumerator1.getText()),Integer.parseInt(numerator2.getText()),Integer.parseInt(denumerator2.getText()));
+                            returnvalues = Breuk.divide(Integer.parseInt(numerator1.getText()), Integer.parseInt(denumerator1.getText()), Integer.parseInt(numerator2.getText()), Integer.parseInt(denumerator2.getText()));
                         }
-                    }catch (ArithmeticException ex){
+                    }catch (ArithmeticException | NumberFormatException ex){
                         JDialog dialog = new JDialog();
-                        dialog.add(new JLabel("Cannot devide by zero"));
-                        dialog.setSize(200, 100);
+
+                        dialog.add(new JLabel(ex.toString()));
+                        dialog.setSize(400, 100);
                         dialog.setVisible(true);
                         dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     }
@@ -77,13 +79,7 @@ public class Scherm extends JFrame{
                     numerator3.setVisible(true);
                     denumerator3.setVisible(true);
                     jSeparator3.setVisible(true);
-                    if(returnvalues[0] < 0){
-                        if(returnvalues[2] != 0){
-                            returnvalues[0] = returnvalues[0]*-1;
-                        }else{
-                            helen.setVisible(false);
-                        }
-                    }
+                    Math.abs(returnvalues[0]);
                     if(returnvalues[2] == 0){
                         helen.setVisible(false);
                     }
